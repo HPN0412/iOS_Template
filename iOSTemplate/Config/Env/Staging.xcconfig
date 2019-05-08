@@ -1,0 +1,21 @@
+//
+//  Staging.xcconfig
+//  iOSTemplate
+//
+//  Created by Hanh Pham N on 5/7/19.
+//  Copyright © 2019 hpn. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Pods/Target Support Files/Pods-iOSTemplate/Pods-iOSTemplate.staging.xcconfig"
+
+// MARK: - Info
+APP_NAME = iOSTemplate
+APP_VERSION = 0.2
+APP_VERSION_CODE = 1
+APP_BUNDLE_ID = vn.hpn.iOSTemplate
+
+// MARK: - App
+API_ENDPOINT = http:\/\/youtube.com
