@@ -10,5 +10,5 @@ import Foundation
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
-    static let firstInstall = DefaultsKey<Bool>("App.Prufin.FirstInstall")
+    static let firstInstall = DefaultsKey<Bool>("App.Prufin.FirstInstall", defaultValue: false)
 }

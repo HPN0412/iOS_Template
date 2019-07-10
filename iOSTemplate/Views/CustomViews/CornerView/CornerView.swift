@@ -10,7 +10,7 @@ import UIKit
 
 @IBDesignable
 final class View: UIView {
-    
+
     @IBInspectable var topLeft: Bool = false {
         didSet {
             if topLeft {
@@ -20,7 +20,7 @@ final class View: UIView {
             }
         }
     }
-    
+
     @IBInspectable var topRight: Bool = false {
         didSet {
             if topRight {
@@ -30,7 +30,7 @@ final class View: UIView {
             }
         }
     }
-    
+
     @IBInspectable var bottomLeft: Bool = false {
         didSet {
             if bottomLeft {
@@ -40,7 +40,7 @@ final class View: UIView {
             }
         }
     }
-    
+
     @IBInspectable var bottomRight: Bool = false {
         didSet {
             if bottomRight {
@@ -50,7 +50,7 @@ final class View: UIView {
             }
         }
     }
-    
+
     @IBInspectable var corner: CGFloat = 0
     @IBInspectable var colorBorder: UIColor = .white
     @IBInspectable var fillColor: UIColor = .white
@@ -61,20 +61,20 @@ final class View: UIView {
     @IBInspectable var offsetShadow: CGSize = CGSize.zero
     @IBInspectable var shadowBlur: CGFloat = 10
     @IBInspectable var colorShadow: UIColor = .clear
-    
+
     var roundedCorners: UIRectCorner = []
-    
+
     convenience init(corner: CGFloat, rectCorner: UIRectCorner) {
         self.init(frame: CGRect(origin: .zero, size: CGSize(width: 200, height: 200)))
         self.corner = corner
         self.roundedCorners = rectCorner
     }
-    
+
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         drawBackground(rectangle: rect)
     }
-    
+
     private func drawBackground(rectangle backgroundRectangle: CGRect) {
         let tileRectangle = backgroundRectangle.insetBy(dx: insetDx.scaling, dy: insetDy.scaling)
         let context = UIGraphicsGetCurrentContext()
@@ -98,5 +98,3 @@ final class View: UIView {
         }
     }
 }
-
-

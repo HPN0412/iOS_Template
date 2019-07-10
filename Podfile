@@ -10,10 +10,11 @@ end
 
 # Swift
 def swift
-  pod 'Alamofire', '4.8.1'
-  pod 'ObjectMapper', '3.4.2'
+  pod 'Alamofire', '4.8.2'
+  pod 'ObjectMapper', '3.5.1'
   pod 'AlamofireObjectMapper', '5.2.0'
   pod 'Socket.IO-Client-Swift'
+  pod 'SwiftLint', '~> 0.33.1'
 end
 
 # UI
@@ -45,9 +46,9 @@ end
 
 # Utils
 def utils
-  pod 'SwifterSwift', '4.6.0'
-  pod 'R.swift', '5.0.2'
-  pod 'SwiftyUserDefaults', '3.0.1'
+  pod 'SwifterSwift', '5.0.0'
+  pod 'R.swift', '5.0.3'
+  pod 'SwiftyUserDefaults', '4.0.0'
 end
 
 target 'iOSTemplate' do

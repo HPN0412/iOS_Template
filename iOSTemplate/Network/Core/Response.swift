@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 
 extension ApiManager {
-    
     // MARK: - Handle response result
     /// Handler response result, check status code or data format
     ///
@@ -18,10 +17,12 @@ extension ApiManager {
     /// - parameter completion:  The closure caller when complete handler
     func handlerResult(_ response: DataResponse<ResponseObject>, completion: ApiCompletion) {
 
-        guard let _ = response.response?.statusCode else {
+        guard let statusCode = response.response?.statusCode else {
             completion(.failure(NSError.noResponse))
             return
         }
-        // TODO: - Handle every thing
+        switch statusCode {
+        default: break
+        }
     }
 }

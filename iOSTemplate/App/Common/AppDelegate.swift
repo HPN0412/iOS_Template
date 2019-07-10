@@ -12,7 +12,7 @@ import UIKit
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+
     static let shared: AppDelegate = {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("Cannot cast the AppDelegate")
@@ -20,11 +20,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return delegate
     }()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = HomeVC()
         window?.makeKeyAndVisible()
         return true
     }
 }
-

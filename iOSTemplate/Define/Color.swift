@@ -8,13 +8,14 @@
 
 import UIKit
 
-struct Color {
-    
-}
+struct Color {}
 
-extension Color  {
-    static func RGB(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ alpha: CGFloat = 1) -> UIColor {
-        return UIColor(red: r/255, green: CGFloat(g/255), blue: CGFloat(b/255), alpha: alpha)
+extension Color {
+    static func RGB(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat = 1) -> UIColor {
+        return UIColor(red: CGFloat(green / 255),
+                       green: CGFloat(green / 255),
+                       blue: CGFloat(blue / 255),
+                       alpha: alpha)
     }
 
     enum GradientType: Int {
@@ -24,8 +25,10 @@ extension Color  {
         case bottomLeftToTopRight
     }
 
-    // TODO: - Create command function
-    static func makeGradientLayer(size: CGSize, from: UIColor, to color: UIColor, type: GradientType) -> CAGradientLayer {
+    static func makeGradientLayer(size: CGSize,
+                                  from: UIColor,
+                                  to color: UIColor,
+                                  type: GradientType) -> CAGradientLayer {
         let colors = [from.cgColor, color.cgColor]
         let gradientLayer = CAGradientLayer()
         gradientLayer.name = "GradientBackground"

@@ -25,7 +25,6 @@ final class HandleWrapper: NSObject {
 }
 
 extension UIRefreshControl {
-    
     private struct Associated {
         static var key = "Completion"
     }
@@ -38,17 +37,16 @@ extension UIRefreshControl {
             objc_setAssociatedObject(self, &Associated.key, HandleWrapper(newValue), objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
+
     convenience init(color: UIColor = .black, handler: RefreshHandler?) {
         self.init()
         tintColor = color
         self.handler = handler
         addTarget(self, action: #selector(UIRefreshControl.refreshInvoke), for: .valueChanged)
     }
-    
+
     @objc func refreshInvoke() {
         endRefreshing()
         handler?(self)
     }
 }
-
