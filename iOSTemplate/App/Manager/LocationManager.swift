@@ -21,21 +21,21 @@ final class LocationManager: NSObject {
         return locationManager
     }()
     private var completion: LocationManager.Completion?
-    
+
     var currentLocation: CLLocation? {
         didSet {
             completion?(currentLocation)
         }
     }
-    
+
     var authorizationStatus: CLAuthorizationStatus {
         return CLLocationManager.authorizationStatus()
     }
-    
+
     var isEnable: Bool {
         return CLLocationManager.locationServicesEnabled()
     }
-    
+
     func getCurrentLocation(completion: LocationManager.Completion? = nil) {
         self.completion = completion
         guard isEnable && authorizationStatus == .authorizedWhenInUse else {
@@ -47,20 +47,19 @@ final class LocationManager: NSObject {
 }
 
 extension LocationManager: CLLocationManagerDelegate {
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         currentLocation = location
         locationManager.stopUpdatingLocation()
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status == .authorizedWhenInUse else { return }
         locationManager.startUpdatingLocation()
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationManager.stopUpdatingLocation()
     }
 }
-

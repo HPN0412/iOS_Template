@@ -25,7 +25,7 @@ extension ApiManager {
             completion?(.failure(NSError.serviceError))
             return nil
         }
-        
+
         let encoding: ParameterEncoding
         if target.method == .post {
             encoding = JSONEncoding.default
@@ -39,7 +39,7 @@ extension ApiManager {
                                         encoding: encoding,
                                         headers: target.headers)
         request.responseObject { (response: DataResponse<ResponseObject>) in
-            self.handlerResult(response, completion: { completion?($0) } )
+            self.handlerResult(response, completion: { completion?($0) })
         }
         return request
     }
@@ -63,7 +63,7 @@ extension ApiManager {
                                 fileName: uploadData.fileName,
                                 mimeType: uploadData.mimeType)
             })
-            
+
             target.params?.forEach({ (key, value) in
                 if let data = (value as? String)?.data(using: String.Encoding.utf8) {
                     formData.append(data, withName: key)
@@ -78,7 +78,7 @@ extension ApiManager {
                 self.uploadRequest = request
                 request.uploadProgress(closure: { progressHandler($0) })
                 request.responseObject { (response: DataResponse<ResponseObject>) in
-                    self.handlerResult(response, completion: { completion($0) } )
+                    self.handlerResult(response, completion: { completion($0) })
                     self.uploadRequest = nil
                 }
             case .failure(let error):

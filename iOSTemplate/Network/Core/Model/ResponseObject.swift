@@ -10,15 +10,15 @@ import Foundation
 import ObjectMapper
 
 final class ResponseObject: Mappable {
-    var statusCode : Int?
-    var message : String?
+    var statusCode: Int?
+    var message: String?
     var data: Any?
     var debug: Any?
-    
-    init() { }
-    
+
+    init() {}
+
     required init?(map: Map) { }
-    
+
     func mapping(map: Map) {
         statusCode <- map["status_code"]
         message <- map["messages"]

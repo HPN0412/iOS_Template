@@ -47,9 +47,9 @@ extension UIButton {
 
 extension CGFloat {
     var scaling: CGFloat {
-        return self * SwifterSwift.screenWidth / 375
+        return self * UIScreen.main.bounds.width / 375
     }
-    
+
     func rounded(to place: Int) -> CGFloat {
         let divisor = pow(10.0, CGFloat(place))
         return (self * divisor).rounded() / divisor
@@ -58,7 +58,6 @@ extension CGFloat {
 
 extension Int {
     var scaling: CGFloat {
-        return CGFloat(self) * SwifterSwift.screenWidth / 375
+        return CGFloat(self) * UIScreen.main.bounds.width / 375
     }
 }
-

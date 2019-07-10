@@ -12,7 +12,7 @@ final class HomeVC: UIViewController {
 
     @IBOutlet weak var exampleLabel: UILabel!
     @IBOutlet weak var exampleXibloclabel: UILabel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

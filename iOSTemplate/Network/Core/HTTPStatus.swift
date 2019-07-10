@@ -14,7 +14,7 @@ enum HTTPStatus: Int {
     case switchingProtocols = 101
     case processing = 102
     case checkpoint = 103
-    
+
     // Successful 2xx
     case success = 200
     case created = 201
@@ -26,7 +26,7 @@ enum HTTPStatus: Int {
     case multiStatus = 207
     case alreadyReported = 208
     case imUsed = 226
-    
+
     // Redirection 3xx
     case multipleChoices = 300
     case movedPermanently = 301
@@ -37,7 +37,7 @@ enum HTTPStatus: Int {
     case switchProxy = 306
     case temporaryRedirect = 307
     case resumeIncomplete = 308
-    
+
     // Client Error 4xx
     case badRequest = 400
     case unauthorized = 401
@@ -79,7 +79,7 @@ enum HTTPStatus: Int {
     case httPtoHTTPS = 497
     case tokenExpiredOrInvalid = 498
     case cientClosedRequest = 499
-    
+
     // Server Error 5xx
     case internalServerError = 500
     case notImplemented = 501
@@ -95,14 +95,14 @@ enum HTTPStatus: Int {
     case networkAuthenticationRequired = 511
     case networkReadTimeout = 598
     case networkConnectTimeout = 599
-    
+
     // Alamofire error code
     case noInternetConnection = -1_005
-    
+
     public init?(code: Int) {
         self.init(rawValue: code)
     }
-    
+
     public var code: Int {
         return rawValue
     }

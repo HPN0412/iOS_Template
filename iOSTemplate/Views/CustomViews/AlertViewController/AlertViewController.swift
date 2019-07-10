@@ -14,7 +14,7 @@ final class AlertViewController: UIViewController {
         case alert
         case actionSheet
     }
-    
+
     @IBOutlet weak var contentView: UIView!
     var style: AlertViewController.Style = .alert
     var tap: UITapGestureRecognizer!
@@ -23,7 +23,7 @@ final class AlertViewController: UIViewController {
             tap.isEnabled = shouldDismissOnTouchOutside
         }
     }
-    
+
     init(preferredStyle: AlertViewController.Style = .alert) {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overCurrentContext
@@ -32,27 +32,27 @@ final class AlertViewController: UIViewController {
         tap = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))
         tap.delegate = self
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addGestureRecognizer(tap)
         view.backgroundColor = .clear
         view.isOpaque = false
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
-    
-    @objc @IBAction func dismissPopup() {
+
+    @IBAction func dismissPopup() {
         dismiss()
     }
 
@@ -70,7 +70,7 @@ extension AlertViewController: UIViewControllerTransitioningDelegate {
         }
         return ActionSheetAnimationTransition(.present)
     }
-    
+
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         if style == .alert {
             return AlertAnimationTransition(.dismiss)
@@ -85,16 +85,16 @@ final class ActionSheetAnimationTransition: NSObject, UIViewControllerAnimatedTr
         case dismiss
     }
     private var transition: Transition = .dismiss
-    
+
     init(_ transition: Transition) {
         super.init()
         self.transition = transition
     }
-    
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.2
     }
-    
+
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         if transition == .present {
             animatePresentation(with: transitionContext)
@@ -102,7 +102,7 @@ final class ActionSheetAnimationTransition: NSObject, UIViewControllerAnimatedTr
             animateDismissal(with: transitionContext)
         }
     }
-    
+
     private func animatePresentation(with transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
         guard let toController = transitionContext.viewController(forKey: .to) as? AlertViewController else { return }
@@ -117,12 +117,11 @@ final class ActionSheetAnimationTransition: NSObject, UIViewControllerAnimatedTr
                 toController.contentView.frame.origin.y -= toController.contentView.height
 //                containerView.backgroundColor = Color.popUpBackground
                 containerView.backgroundColor = .black
-        },
-            completion: { _ in
+            }, completion: { _ in
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        })
+            })
     }
-    
+
     private func animateDismissal(with transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
         guard let fromController = transitionContext.viewController(forKey: .from) as? AlertViewController else { return }
@@ -134,13 +133,12 @@ final class ActionSheetAnimationTransition: NSObject, UIViewControllerAnimatedTr
             animations: {
                 containerView.backgroundColor = .clear
                 fromController.contentView.frame.origin.y += fromController.contentView.height
-        },
-            completion: { (_) in
+            }, completion: { (_) in
                 fromController.view.isHidden = false
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        })
+            })
     }
-    
+
 }
 
 final class AlertAnimationTransition: NSObject, UIViewControllerAnimatedTransitioning {
@@ -148,18 +146,18 @@ final class AlertAnimationTransition: NSObject, UIViewControllerAnimatedTransiti
         case present
         case dismiss
     }
-    
+
     private var transition: Transition = .dismiss
-    
+
     init(_ transition: Transition) {
         super.init()
         self.transition = transition
     }
-    
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.2
     }
-    
+
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         if transition == .present {
             animatePresentation(with: transitionContext)
@@ -167,7 +165,7 @@ final class AlertAnimationTransition: NSObject, UIViewControllerAnimatedTransiti
             animateDismissal(with: transitionContext)
         }
     }
-    
+
     private func animatePresentation(with transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
         guard let toController = transitionContext.viewController(forKey: .to) as? AlertViewController else { return }
@@ -187,14 +185,13 @@ final class AlertAnimationTransition: NSObject, UIViewControllerAnimatedTransiti
                 containerView.backgroundColor = .black
                 snapshot.alpha = 1
                 snapshot.transform = CGAffineTransform(scaleX: 1, y: 1)
-        },
-            completion: { _ in
+            }, completion: { _ in
                 toController.view.isHidden = false
                 snapshot.removeFromSuperview()
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        })
+            })
     }
-    
+
     private func animateDismissal(with transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
         guard let fromController = transitionContext.viewController(forKey: .from) as? AlertViewController else { return }
@@ -213,12 +210,11 @@ final class AlertAnimationTransition: NSObject, UIViewControllerAnimatedTransiti
                 containerView.backgroundColor = .clear
                 snapshot.alpha = 0
                 snapshot.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-        },
-            completion: { (_) in
+            }, completion: { (_) in
                 fromController.view.isHidden = false
                 snapshot.removeFromSuperview()
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        })
+            })
     }
 }
 

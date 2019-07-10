@@ -11,25 +11,25 @@ import UIKit
 @IBDesignable
 final class PlaceholderTextView: UITextView {
     private struct Constants {
-        static let defaultiOSPlaceholderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0980392, alpha: 0.22)
+        static let defaultiOSPlaceholderColor = Color.RGB(0, 0, 12, 0.22)
     }
-    
+
     public let placeholderLabel: UILabel = UILabel()
-    
+
     private var placeholderLabelConstraints = [NSLayoutConstraint]()
-    
+
     @IBInspectable var placeholder: String = "" {
         didSet {
             placeholderLabel.text = placeholder
         }
     }
-    
+
     @IBInspectable var placeholderColor: UIColor = Constants.defaultiOSPlaceholderColor {
         didSet {
             placeholderLabel.textColor = placeholderColor
         }
     }
-    
+
     override var font: UIFont! {
         didSet {
             if placeholderFont == nil {
@@ -37,60 +37,55 @@ final class PlaceholderTextView: UITextView {
             }
         }
     }
-    
+
     var placeholderFont: UIFont? {
         didSet {
             let font = (placeholderFont != nil) ? placeholderFont : self.font
             placeholderLabel.font = font
         }
     }
-    
+
     override var textAlignment: NSTextAlignment {
         didSet {
             placeholderLabel.textAlignment = textAlignment
         }
     }
-    
+
     override var text: String! {
         didSet {
             textDidChange()
         }
     }
-    
+
     override var attributedText: NSAttributedString! {
         didSet {
             textDidChange()
         }
     }
-    
+
     override var textContainerInset: UIEdgeInsets {
         didSet {
             updateConstraintsForPlaceholderLabel()
         }
     }
-    
+
     override public init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         commonInit()
     }
-    
+
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
+
     private func commonInit() {
-        #if swift(>=4.2)
         let notificationName = UITextView.textDidChangeNotification
-        #else
-        let notificationName = NSNotification.Name.UITextView.textDidChangeNotification
-        #endif
-        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(textDidChange),
                                                name: notificationName,
                                                object: nil)
-        
+
         placeholderLabel.font = font
         placeholderLabel.textColor = placeholderColor
         placeholderLabel.textAlignment = textAlignment
@@ -101,7 +96,7 @@ final class PlaceholderTextView: UITextView {
         addSubview(placeholderLabel)
         updateConstraintsForPlaceholderLabel()
     }
-    
+
     private func updateConstraintsForPlaceholderLabel() {
         var newConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(\(textContainerInset.left + textContainer.lineFragmentPadding))-[placeholder]",
             options: [],
@@ -124,26 +119,20 @@ final class PlaceholderTextView: UITextView {
         addConstraints(newConstraints)
         placeholderLabelConstraints = newConstraints
     }
-    
+
     @objc private func textDidChange() {
         placeholderLabel.isHidden = !text.isEmpty
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         placeholderLabel.preferredMaxLayoutWidth = textContainer.size.width - textContainer.lineFragmentPadding * 2.0
     }
-    
+
     deinit {
-        #if swift(>=4.2)
         let notificationName = UITextView.textDidChangeNotification
-        #else
-        let notificationName = NSNotification.Name.UITextView.textDidChangeNotification
-        #endif
-        
         NotificationCenter.default.removeObserver(self,
                                                   name: notificationName,
                                                   object: nil)
     }
-    
 }
